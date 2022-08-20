@@ -1,21 +1,24 @@
+import random
+
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from datacenter.models import Schoolkid, Lesson, Mark, Chastisement, Commendation
 
 
 def fix_marks(name):
-    import random
-    schoolkid_marks = Mark.objects.filter(schoolkid__full_name__contains=name, points__lt=4)
+    schoolkid_marks = Mark.objects.filter(schoolkid__full_name__contains=name,
+                                          points__lt=4)
     for mark in schoolkid_marks:
         mark.points = random.randint(4, 5)
         mark.save()
+
 
 def remove_chastisements(name):
     chastisement = Chastisement.objects.filter(schoolkid__full_name__contains=name)
     for mark in chastisement:
         mark.delete()
 
+
 def create_commendation(name, subject, lesson_date):
-    import random
     praise = ['Молодец!',
               'Отлично!',
               'Хорошо!',
@@ -27,7 +30,7 @@ def create_commendation(name, subject, lesson_date):
               'Я тобой горжусь!',
               'С каждым разом у тебя получается всё лучше!',
               'Мы с тобой не зря поработали!' 'Я вижу, как ты стараешься!'
-    ]
+              ]
     try:
         child = Schoolkid.objects.get(full_name__icontains=name)
         lesson = Lesson.objects.filter(subject__title__icontains=subject,
