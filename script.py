@@ -6,10 +6,11 @@ from datacenter.models import Schoolkid, Lesson, Mark, Chastisement, Commendatio
 
 def fix_marks(name):
     schoolkid_marks = Mark.objects.filter(schoolkid__full_name__contains=name,
-                                          points__lt=4)
-    for mark in schoolkid_marks:
-        mark.points = random.randint(4, 5)
-        mark.save()
+                                          points=3).update(points=5)
+
+    schoolkid_marks = Mark.objects.filter(schoolkid__full_name__contains=name,
+                                          points__lt=3).update(points=4)
+
 
 
 def remove_chastisements(name):
