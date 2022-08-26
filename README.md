@@ -8,7 +8,6 @@
 
 - Скачайте код
 - Установите зависимости командой `pip install -r requirements.txt`
-- Создайте БД командой `python3 manage.py migrate`
 - Скопируйте в папку с файлом `manage.py` базу данных с оценками учеников `schoolbase.sqlite3`
 - Запустите сервер командой `python3 manage.py runserver`
 Вы увидите:
